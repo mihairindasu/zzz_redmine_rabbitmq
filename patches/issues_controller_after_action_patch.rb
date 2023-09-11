@@ -17,6 +17,9 @@ module RedmineRabbitmq
         def modify_response_include_sprint_id
           Rails.logger.info "IssuesController#modify_response_include_sprint_id"
           
+          # Check if the request format is JSON
+          return unless request.format.json?
+
           begin
             modified_data = JSON.parse(response.body)
 
@@ -28,7 +31,7 @@ module RedmineRabbitmq
               end
             end
 
-            # Modify the response body directly without using render
+            # Modify the response body directly
             response.body = modified_data.to_json
           rescue JSON::ParserError => e
             Rails.logger.error "Error parsing response JSON in IssuesController#modify_response_include_sprint_id: #{e.message}"
