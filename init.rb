@@ -18,9 +18,9 @@ end
 Redmine::Plugin.register :redmine_rabbitmq do
   name 'Redmine Rabbitmq plugin'
   author 'eConfaire ID'
-  description 'This is a plugin for Redmine'
+  description 'This is a plugin for redmine that helps you send messages to RabbitMQ when certain events occur. The events are: issue creation, issue update, user login, project creation, project update, sprint creation, sprint update. It also has a rake task that can be used to send failed messages to RabbitMQ. And a patch to sprint model to get all sprints.'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
+  url 'https://econfaire.ro/'
   author_url 'https://econfaire.ro/'
   settings default: {
     'rabbitmq_host' => 'host.docker.internal',
