@@ -17,7 +17,7 @@ module RedmineRabbitmq
         def modify_response_include_sprint_id
           Rails.logger.info "IssuesController#modify_response_include_sprint_id"
           
-          # Check if the request format is JSON
+          # Check if the request format is JSON / api call
           return unless request.format.json?
 
           begin

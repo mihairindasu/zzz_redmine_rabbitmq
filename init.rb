@@ -9,6 +9,7 @@ require_dependency 'redmine_rabbitmq/hooks'
 require_dependency 'project_patch'
 require_dependency 'sprint_patch'
 require_dependency 'issues_controller_after_action_patch'
+require_dependency 'scrum_controller_after_action_patch'
 
 if defined?(Sprint)
   Sprint.send(:include, RedmineRabbitmq::Patches::SprintPatch) unless Sprint.included_modules.include? RedmineRabbitmq::Patches::SprintPatch
