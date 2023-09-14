@@ -1,12 +1,12 @@
 # # D:\redmine-plugins\redmine_rabbitmq\config\setup_rabbitmq.rb
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
     class RabbitmqConnection
       MAX_RETRIES = 2
       def self.connect
-        host = Setting.plugin_redmine_rabbitmq['rabbitmq_host']
-        user = Setting.plugin_redmine_rabbitmq['rabbitmq_user']
-        password = Setting.plugin_redmine_rabbitmq['rabbitmq_password']
+        host = Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_host']
+        user = Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_user']
+        password = Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_password']
   
         retries = 0
 

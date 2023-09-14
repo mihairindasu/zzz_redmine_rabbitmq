@@ -1,7 +1,7 @@
 
 require_dependency 'issues_controller'
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   module Patches
     module IssuesControllerAfterActionPatch
       def self.included(base)
@@ -43,4 +43,4 @@ module RedmineRabbitmq
 end
 
 # Apply the patch to the IssuesController
-IssuesController.send(:include, RedmineRabbitmq::Patches::IssuesControllerAfterActionPatch)
+IssuesController.send(:include, ZzzRedmineRabbitmq::Patches::IssuesControllerAfterActionPatch)

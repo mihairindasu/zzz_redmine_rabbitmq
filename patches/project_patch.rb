@@ -2,7 +2,7 @@
 
 require_dependency 'project'
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   module Patches
     module ProjectPatch
       def self.included(base)
@@ -35,4 +35,4 @@ module RedmineRabbitmq
 end
 
 # Apply the patch
-Project.send(:include, RedmineRabbitmq::Patches::ProjectPatch)
+Project.send(:include, ZzzRedmineRabbitmq::Patches::ProjectPatch)

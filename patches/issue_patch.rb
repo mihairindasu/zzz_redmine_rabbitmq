@@ -2,7 +2,7 @@
 
 require_dependency 'issue'
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   module Patches
     module IssuePatch
       def self.included(base)
@@ -28,4 +28,4 @@ module RedmineRabbitmq
 end
 
 # Apply the patch
-Issue.send(:include, RedmineRabbitmq::Patches::IssuePatch)
+Issue.send(:include, ZzzRedmineRabbitmq::Patches::IssuePatch)

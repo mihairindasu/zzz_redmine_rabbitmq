@@ -4,7 +4,7 @@ scrum_plugin_path = Rails.root.join('plugins', 'scrum', 'app', 'models', 'sprint
 # require_dependency '/usr/src/redmine/plugins/scrum/app/models/sprint'  # Make sure this is the correct path to the Sprint model in Redmine
 require_dependency scrum_plugin_path.to_s
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   module Patches
     module SprintPatch
       def self.included(base)

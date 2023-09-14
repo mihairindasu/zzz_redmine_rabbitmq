@@ -1,4 +1,4 @@
-class RedmineRabbitmq::SprintsController < ApplicationController
+class ZzzRedmineRabbitmq::SprintsController < ApplicationController
   unloadable
 
   before_action :check_api_key

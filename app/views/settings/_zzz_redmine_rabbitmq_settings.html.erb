@@ -1,0 +1,12 @@
+<p>
+  <%= label_tag :rabbitmq_host, 'RabbitMQ Host' %>
+  <%= text_field_tag 'settings[rabbitmq_host]', Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_host'] %>
+</p>
+<p>
+  <%= label_tag :rabbitmq_user, 'RabbitMQ User' %>
+  <%= text_field_tag 'settings[rabbitmq_user]', Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_user'] %>
+</p>
+<p>
+  <%= label_tag :rabbitmq_password, 'RabbitMQ Password' %>
+  <%= password_field_tag 'settings[rabbitmq_password]', Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_password'] %>
+</p>

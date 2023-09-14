@@ -3,7 +3,7 @@ scrum_plugin_path = Rails.root.join('plugins', 'scrum', 'app', 'controllers', 's
 
 require_dependency scrum_plugin_path.to_s
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   module Patches
     module ScrumControllerAfterActionPatch
       def self.included(base)
@@ -38,5 +38,5 @@ module RedmineRabbitmq
 end
 
 # Apply the patch to the ScrumController
-ScrumController.send(:include, RedmineRabbitmq::Patches::ScrumControllerAfterActionPatch)
+ScrumController.send(:include, ZzzRedmineRabbitmq::Patches::ScrumControllerAfterActionPatch)
 

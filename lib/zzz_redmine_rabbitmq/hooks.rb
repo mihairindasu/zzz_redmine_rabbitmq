@@ -1,6 +1,6 @@
 # D:\redmine-plugins\redmine_rabbitmq\lib\redmine_rabbitmq\hooks.rb
 
-module RedmineRabbitmq
+module ZzzRedmineRabbitmq
   FAILED_MESSAGES_FILE = "#{Rails.root}/failed_messages.log"
   TEMP_FAILED_MESSAGES_FILE = "#{Rails.root}/temp_failed_messages.log"
   RETRY_TIME = 600 # seconds / 10 minutes
@@ -20,9 +20,9 @@ module RedmineRabbitmq
 
   def self.retry_failed_messages
      # Check if the necessary settings are provided
-    unless Setting.plugin_redmine_rabbitmq['rabbitmq_host'].present? &&
-    Setting.plugin_redmine_rabbitmq['rabbitmq_user'].present? &&
-    Setting.plugin_redmine_rabbitmq['rabbitmq_password'].present?
+    unless Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_host'].present? &&
+    Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_user'].present? &&
+    Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_password'].present?
 
     Rails.logger.warn "RabbitMQ settings not configured. Skipping retry of failed messages."
     return
@@ -38,7 +38,7 @@ module RedmineRabbitmq
       routing_key = data["routing_key"]
       
       begin
-        channel, exchange, conn = RedmineRabbitmq::RabbitmqConnection.connect
+        channel, exchange, conn = ZzzRedmineRabbitmq::RabbitmqConnection.connect
         exchange.publish(message, routing_key: routing_key, persistent: true)
         conn.close
       rescue => e
@@ -57,9 +57,9 @@ module RedmineRabbitmq
   class Hooks < Redmine::Hook::ViewListener
     def send_message_to_rabbitmq(message, routing_key)
       # Check if the necessary settings are provided
-      unless Setting.plugin_redmine_rabbitmq['rabbitmq_host'].present? &&
-             Setting.plugin_redmine_rabbitmq['rabbitmq_user'].present? &&
-             Setting.plugin_redmine_rabbitmq['rabbitmq_password'].present?
+      unless Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_host'].present? &&
+             Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_user'].present? &&
+             Setting.plugin_zzz_redmine_rabbitmq['rabbitmq_password'].present?
         
         Rails.logger.warn "RabbitMQ settings not configured. Storing message locally."
         store_message_locally(message, routing_key)
@@ -68,12 +68,12 @@ module RedmineRabbitmq
     
       retries = 0
       begin
-        channel, exchange, conn = RedmineRabbitmq::RabbitmqConnection.connect
+        channel, exchange, conn = ZzzRedmineRabbitmq::RabbitmqConnection.connect
         exchange.publish(message, routing_key: routing_key, persistent: true)
         conn.close
     
         # If the message was sent successfully, try to send the failed messages
-        RedmineRabbitmq.retry_failed_messages
+        ZzzRedmineRabbitmq.retry_failed_messages
       rescue => e
         Rails.logger.error "Failed to send message: #{e.message}"
         store_message_locally(message, routing_key)
@@ -81,7 +81,7 @@ module RedmineRabbitmq
     end
     def store_message_locally(message, routing_key)
       begin
-        File.open(RedmineRabbitmq::FAILED_MESSAGES_FILE, 'a') do |f|
+        File.open(ZzzRedmineRabbitmq::FAILED_MESSAGES_FILE, 'a') do |f|
           f.puts({data: message, routing_key: routing_key}.to_json)
         end
       rescue => e
