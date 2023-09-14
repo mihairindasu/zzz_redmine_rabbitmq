@@ -24,14 +24,19 @@ module RedmineRabbitmq
           # Declare a queue
           queue = channel.queue("redmine.queue.durable", durable: true)
 
-           # Bind the queue to the exchange with the first routing key
-           queue.bind(exchange, routing_key: 'redmine.projects_key')
+          # Bind the queue to the exchange
+           queue.bind(exchange, routing_key: 'redmine.cru_projects_key')
 
-           # Bind the queue to the exchange with the second routing key
-           queue.bind(exchange, routing_key: 'redmine.issues_key')
+           queue.bind(exchange, routing_key: 'redmine.cru_issues_key')
 
-           # Bind the queue to the exchange with the second routing key
-           queue.bind(exchange, routing_key: 'redmine.sprints_key')
+           queue.bind(exchange, routing_key: 'redmine.cru_sprints_key')
+
+           queue.bind(exchange, routing_key: 'redmine.d_projects_key')
+
+           queue.bind(exchange, routing_key: 'redmine.d_issues_key')
+
+           queue.bind(exchange, routing_key: 'redmine.d_sprints_key')
+
           return channel, exchange, conn
         rescue Bunny::TCPConnectionFailed => e
           Rails.logger.error "Failed to connect to RabbitMQ: #{e.message}"

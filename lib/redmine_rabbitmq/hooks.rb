@@ -99,14 +99,14 @@ module RedmineRabbitmq
       project = context[:project]
       Rails.logger.warn "Project save hook triggered id:#{project.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(project.to_json, 'redmine.projects_key')
+      send_message_to_rabbitmq(project.to_json, 'redmine.cru_projects_key')
     end
 
     def controller_project_after_destroy(context = {})
       project = context[:project] 
       Rails.logger.warn "Project destroy hook triggered id:#{project.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(project.to_json, 'redmine.projects_key')
+      send_message_to_rabbitmq(project.to_json, 'redmine.d_projects_key')
     end
 
     # Hook for when a project is created or updated
@@ -114,33 +114,33 @@ module RedmineRabbitmq
       issue = context[:issue]
       Rails.logger.warn "Issue new hook triggered id:#{issue.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(issue.to_json, 'redmine.issues_key')
+      send_message_to_rabbitmq(issue.to_json, 'redmine.cru_issues_key')
     end
     def controller_issues_edit_after_save(context = {})
       issue = context[:issue]
       Rails.logger.warn "Issue edit hook triggered id:#{issue.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(issue.to_json, 'redmine.issues_key')
+      send_message_to_rabbitmq(issue.to_json, 'redmine.cru_issues_key')
     end
     def controller_issues_after_destroy(context = {})
       issue = context[:issue]
       Rails.logger.warn "Issue destroy hook triggered id:#{issue.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(issue.to_json, 'redmine.issues_key')
+      send_message_to_rabbitmq(issue.to_json, 'redmine.d_issues_key')
     end
 
     def controller_sprint_after_save(context = {})
       sprint = context[:sprint]
       Rails.logger.warn "Sprint hook triggered id:#{sprint.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(sprint.to_json, 'redmine.sprints_key')
+      send_message_to_rabbitmq(sprint.to_json, 'redmine.cru_sprints_key')
     end
 
     def controller_sprint_after_destroy(context = {})
       sprint = context[:sprint]
       Rails.logger.warn "Sprint destroy hook triggered id:#{sprint.id}"
       # Send a message to RabbitMQ
-      send_message_to_rabbitmq(sprint.to_json, 'redmine.sprints_key')
+      send_message_to_rabbitmq(sprint.to_json, 'redmine.d_sprints_key')
     end
   end
 end
