@@ -13,6 +13,9 @@ module RedmineRabbitmq
 
           # Add after_save callback to trigger your custom hook
           after_save :trigger_custom_hook
+
+          # Add after_destroy callback
+          after_destroy :trigger_after_destroy_hook
         end
       end
 
@@ -20,6 +23,11 @@ module RedmineRabbitmq
         def trigger_custom_hook
           # Call your custom hook
           Redmine::Hook.call_hook(:controller_project_after_save, { project: self })
+        end
+
+        def trigger_after_destroy_hook
+          # Call your custom hook after destroy
+          Redmine::Hook.call_hook(:controller_project_after_destroy, { project: self })
         end
       end
     end

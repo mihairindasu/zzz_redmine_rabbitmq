@@ -15,6 +15,9 @@ module RedmineRabbitmq
 
           # Add after_save callback to trigger your custom hook for Sprint
           after_save :trigger_sprint_custom_hook
+
+           # Add after_destroy callback for Sprint
+          after_destroy :trigger_sprint_after_destroy
         end
       end
 
@@ -22,6 +25,11 @@ module RedmineRabbitmq
         def trigger_sprint_custom_hook
           # Call your custom hook for Sprint
           Redmine::Hook.call_hook(:controller_sprint_after_save, { sprint: self })
+        end
+
+        def trigger_sprint_after_destroy
+          # Call your custom hook after Sprint is destroyed
+          Redmine::Hook.call_hook(:controller_sprint_after_destroy, { sprint: self })
         end
       end
     end

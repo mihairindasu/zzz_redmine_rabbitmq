@@ -6,11 +6,11 @@ $LOAD_PATH.unshift File.expand_path('../app/views', __FILE__)
 require 'redmine'
 require_dependency 'initializers/setup_rabbitmq'
 require_dependency 'redmine_rabbitmq/hooks'
+require_dependency 'issue_patch'
 require_dependency 'project_patch'
 require_dependency 'sprint_patch'
 require_dependency 'issues_controller_after_action_patch'
 require_dependency 'scrum_controller_after_action_patch'
-require_dependency 'issues_controller_destroy_patch'
 
 if defined?(Sprint)
   Sprint.send(:include, RedmineRabbitmq::Patches::SprintPatch) unless Sprint.included_modules.include? RedmineRabbitmq::Patches::SprintPatch
