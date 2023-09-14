@@ -1,3 +1,4 @@
+
 scrum_plugin_path = Rails.root.join('plugins', 'scrum', 'app', 'controllers', 'scrum_controller.rb')
 
 require_dependency scrum_plugin_path.to_s
@@ -21,11 +22,11 @@ module RedmineRabbitmq
           Rails.logger.info "ScrumController#create_user_story"
           # Determine the correct issue object based on the action
           issue_object = case action_name
-          when 'create_task', 'update_task'
-            @task
-          else
-            @pbi
-          end
+                         when 'create_task', 'update_task'
+                           @task
+                         else
+                           @pbi
+                         end
           if issue_object && issue_object.persisted?
             # Call your custom hook
             Redmine::Hook.call_hook(:controller_issues_new_after_save, { issue: issue_object })

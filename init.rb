@@ -10,6 +10,7 @@ require_dependency 'project_patch'
 require_dependency 'sprint_patch'
 require_dependency 'issues_controller_after_action_patch'
 require_dependency 'scrum_controller_after_action_patch'
+require_dependency 'issues_controller_destroy_patch'
 
 if defined?(Sprint)
   Sprint.send(:include, RedmineRabbitmq::Patches::SprintPatch) unless Sprint.included_modules.include? RedmineRabbitmq::Patches::SprintPatch
@@ -24,6 +25,9 @@ Redmine::Plugin.register :redmine_rabbitmq do
   version '0.0.1'
   url 'https://econfaire.ro/'
   author_url 'https://econfaire.ro/'
+
+  # requires_redmine_plugin :scrum , :version_or_higher => '0.23.0'
+
   settings default: {
     'rabbitmq_host' => 'host.docker.internal',
     'rabbitmq_user' => '',
